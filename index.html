@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>RAG Assistant</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-tag">Voice · RAG · Multi-format</div>
+  <h1>Ask your <span>documents</span>,<br>get instant answers.</h1>
+  <p>Upload a PDF, TXT, or JSON and ask questions by typing or speaking. The assistant answers from your document only.</p>
+  <div class="steps">
+    <div class="step"><div class="step-num">1</div>Upload your file below</div>
+    <div class="step"><div class="step-num">2</div>Type or speak your question</div>
+    <div class="step"><div class="step-num">3</div>Hear the answer spoken aloud</div>
+  </div>
+</div>
+
+<div class="upload-card">
+  <h3>📂 Upload your dataset</h3>
+  <div class="upload-zone" id="drop-zone">
+    <input type="file" id="file-input" accept=".pdf,.txt,.json"/>
+    <div class="upload-icon">📄</div>
+    <div class="upload-label"><strong>Click to browse</strong> or drag &amp; drop</div>
+    <div class="upload-types">PDF · TXT · JSON</div>
+  </div>
+  <div id="file-chosen" class="file-chosen-text"></div>
+  <button class="upload-btn" id="upload-btn" disabled>Upload &amp; Index</button>
+  <div class="upload-status" id="upload-status"></div>
+</div>
+
+<button id="chat-toggle" title="Open assistant" aria-label="Open chat">
+  <svg viewBox="0 0 24 24"><path d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm-2 12H6v-2h12v2zm0-3H6V9h12v2zm0-3H6V6h12v2z"/></svg>
+  <div class="notif-dot" id="notif-dot"></div>
+</button>
+
+<div id="chat-window" role="dialog" aria-label="RAG Assistant chat">
+
+  <div class="chat-header">
+    <div class="bot-avatar">🤖</div>
+    <div class="bot-info">
+      <div class="bot-name">RAG Assistant</div>
+      <div class="bot-sub" id="bot-sub">Ready to answer</div>
+    </div>
+    <div class="header-actions">
+      <button class="hdr-btn" id="server-voice-toggle" title="Auto-play server voice after every answer">
+        <svg viewBox="0 0 24 24"><path d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02z"/></svg>
+        🔇 Auto-play
+      </button>
+      <div class="status-dot" id="status-dot"></div>
+    </div>
+  </div>
+
+  <div class="chat-messages" id="chat-messages">
+    <div class="msg bot">
+      <div class="bubble">👋 Hi! Upload a dataset, then ask questions by typing or using the 🎤 mic button.<br><br>🔊 Each answer has a <b>▶ Play</b> button — or enable <b>Auto-play</b> in the header to hear every answer automatically via server voice.</div>
+      <div class="msg-time">now</div>
+    </div>
+  </div>
+
+  <div id="rec-status">🔴 Listening… speak now, then click mic again to stop</div>
+
+  <div class="chat-input-row">
+    <textarea id="chat-input" rows="1" placeholder="Type a question or press 🎤…"></textarea>
+    <button id="mic-btn" title="Click to start/stop recording">
+      <svg viewBox="0 0 24 24"><path d="M12 14c1.66 0 3-1.34 3-3V5c0-1.66-1.34-3-3-3S9 3.34 9 5v6c0 1.66 1.34 3 3 3zm-1 1.93c-3.94-.49-7-3.85-7-7.93H2c0 4.97 3.66 9.13 8.5 9.9V22h3v-4.07c4.84-.77 8.5-4.93 8.5-9.9h-2c0 4.08-3.06 7.44-7 7.93V16h-1v-.07z"/></svg>
+    </button>
+    <button id="send-btn" aria-label="Send" disabled>
+      <svg viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script src="app.js"></script>
+</body>
+</html>
